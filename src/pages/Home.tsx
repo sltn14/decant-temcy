@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
 import { products, formatRupiah } from "../data/products";
+import { useSearch } from "../context/SearchContext";
 import "./Home.css";
 
 export default function Home() {
+  const { query } = useSearch();
+
+  const filtered = products.filter((p) => {
+    if (!query.trim()) return true;
+    const q = query.toLowerCase();
+    return (
+      p.product_name.toLowerCase().includes(q) ||
+      p.brand.toLowerCase().includes(q)
+    );
+  });
+
   return (
     <div className="page-container home-page">
       <div className="home-hero">
@@ -14,10 +26,17 @@ export default function Home() {
         </p>
       </div>
 
-      <h2 className="section-title">Produk Unggulan</h2>
+      <h2 className="section-title">
+        {query.trim() ? `Hasil pencarian "${query}"` : "Produk Unggulan"}
+      </h2>
 
       <div className="product-grid">
-        {products.map((product) => (
+        {filtered.length === 0 && (
+          <p style={{ color: "var(--text-muted)", gridColumn: "1 / -1", textAlign: "center", padding: "40px 0" }}>
+            Tidak ada produk yang cocok dengan pencarian kamu.
+          </p>
+        )}
+        {filtered.map((product) => (
           <Link
             to={`/product/${product.product_id}`}
             key={product.product_id}

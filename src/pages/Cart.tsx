@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
-import { Minus, Plus } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { formatRupiah } from "../data/products";
 import "./Cart.css";
 
 export default function Cart() {
   const { items, updateQuantity, removeFromCart, totalPrice, totalItems } = useCart();
+  const navigate = useNavigate();
 
   if (items.length === 0) {
     return (
@@ -77,7 +78,7 @@ export default function Cart() {
                     removeFromCart(item.product.product_id, item.sizeKey)
                   }
                 >
-                  Hapus
+                  <Trash2 size={16} />
                 </button>
               </div>
             </div>
@@ -105,7 +106,9 @@ export default function Cart() {
             <span className="label">Total</span>
             <span className="value">{totalPrice}</span>
           </div>
-          <button className="btn-primary">Checkout</button>
+          <button className="btn-primary" onClick={() => navigate("/shipping")}>
+            Lanjut ke Pengiriman
+          </button>
         </div>
       </div>
     </div>

@@ -1,17 +1,28 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { products, formatRupiah } from "../data/products";
+import { useSearch } from "../context/SearchContext";
 import "./Catalog.css";
 
 export default function Catalog() {
   const [activeFilter, setActiveFilter] = useState("all");
+  const { query } = useSearch();
 
   const brands = ["all", ...new Set(products.map((p) => p.brand))];
 
+  const searchFiltered = products.filter((p) => {
+    if (!query.trim()) return true;
+    const q = query.toLowerCase();
+    return (
+      p.product_name.toLowerCase().includes(q) ||
+      p.brand.toLowerCase().includes(q)
+    );
+  });
+
   const filtered =
     activeFilter === "all"
-      ? products
-      : products.filter((p) => p.brand === activeFilter);
+      ? searchFiltered
+      : searchFiltered.filter((p) => p.brand === activeFilter);
 
   return (
     <div className="page-container catalog-page">

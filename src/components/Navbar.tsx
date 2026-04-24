@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { Search, ShoppingCart, User } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { useSearch } from "../context/SearchContext";
 import "./Navbar.css";
 
 export default function Navbar() {
   const { totalItems } = useCart();
+  const { query, setQuery } = useSearch();
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
@@ -18,7 +20,12 @@ export default function Navbar() {
 
         <div className="navbar-search">
           <Search size={16} className="navbar-search-icon" />
-          <input type="text" placeholder="Cari parfum favoritmu..." />
+          <input
+            type="text"
+            placeholder="Cari parfum favoritmu..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
         </div>
 
         <div className="navbar-nav">
