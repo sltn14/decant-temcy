@@ -29,10 +29,6 @@
   margin: 0 auto;
 }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
 .home-empty-state {
   color: var(--text-muted);
   grid-column: 1 / -1;
@@ -40,7 +36,6 @@
   padding: 40px 0;
 }
 
-<<<<<<< HEAD
 /* ── Recommendation section ── */
 
 .home-recommend {
@@ -137,10 +132,6 @@
 
 /* ── Product grid ── */
 
-=======
-=======
->>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
->>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -257,7 +248,6 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
-<<<<<<< HEAD
 
   .home-recommend {
     padding: 20px 16px;
@@ -271,6 +261,4 @@
   .home-recommend-title {
     font-size: 1.2rem;
   }
-=======
->>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
 }
