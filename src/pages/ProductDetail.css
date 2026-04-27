@@ -2,12 +2,21 @@
   animation: fadeIn 0.4s ease;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
 .detail-empty-state {
   color: var(--text-muted);
   text-align: center;
   margin-top: 80px;
 }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
+>>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
 .detail-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -49,9 +49,18 @@ export default function Cart() {
               <div className="cart-item-actions">
                 <div className="cart-qty">
                   <button
+<<<<<<< HEAD
                     type="button"
                     title="Kurangi jumlah produk"
                     aria-label="Kurangi jumlah produk"
+=======
+<<<<<<< HEAD
+                    type="button"
+                    title="Kurangi jumlah produk"
+                    aria-label="Kurangi jumlah produk"
+=======
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
+>>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
                     onClick={() =>
                       updateQuantity(
                         item.product.product_id,
@@ -64,9 +73,18 @@ export default function Cart() {
                   </button>
                   <span>{item.quantity}</span>
                   <button
+<<<<<<< HEAD
                     type="button"
                     title="Tambah jumlah produk"
                     aria-label="Tambah jumlah produk"
+=======
+<<<<<<< HEAD
+                    type="button"
+                    title="Tambah jumlah produk"
+                    aria-label="Tambah jumlah produk"
+=======
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
+>>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
                     onClick={() =>
                       updateQuantity(
                         item.product.product_id,
@@ -80,9 +98,18 @@ export default function Cart() {
                 </div>
                 <button
                   className="cart-remove-btn"
+<<<<<<< HEAD
                   type="button"
                   title="Hapus produk dari keranjang"
                   aria-label="Hapus produk dari keranjang"
+=======
+<<<<<<< HEAD
+                  type="button"
+                  title="Hapus produk dari keranjang"
+                  aria-label="Hapus produk dari keranjang"
+=======
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
+>>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
                   onClick={() =>
                     removeFromCart(item.product.product_id, item.sizeKey)
                   }
@@ -115,8 +142,18 @@ export default function Cart() {
             <span className="label">Total</span>
             <span className="value">{totalPrice}</span>
           </div>
+<<<<<<< HEAD
           <button className="btn-primary" onClick={() => navigate("/checkout")}>
             Lanjut ke Checkout
+=======
+<<<<<<< HEAD
+          <button className="btn-primary" onClick={() => navigate("/checkout")}>
+            Lanjut ke Checkout
+=======
+          <button className="btn-primary" onClick={() => navigate("/shipping")}>
+            Lanjut ke Pengiriman
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
+>>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
           </button>
         </div>
       </div>
