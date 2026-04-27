@@ -3,7 +3,6 @@ import { products, formatRupiah } from "../data/products";
 import { useSearch } from "../context/SearchContext";
 import "./Home.css";
 
-<<<<<<< HEAD
 interface UserPref {
   aroma: string;
   gender: string;
@@ -68,8 +67,6 @@ function getRecommendations(pref: UserPref) {
     .map((s) => s.product);
 }
 
-=======
->>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
 export default function Home() {
   const { query } = useSearch();
 
@@ -82,12 +79,9 @@ export default function Home() {
     );
   });
 
-<<<<<<< HEAD
   const userPref = getUserPref();
   const recommended = userPref ? getRecommendations(userPref) : [];
 
-=======
->>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
   return (
     <div className="page-container home-page">
       <div className="home-hero">
@@ -99,7 +93,6 @@ export default function Home() {
         </p>
       </div>
 
-<<<<<<< HEAD
       {/* ── Recommendation section ── */}
       {userPref && recommended.length > 0 && (
         <section className="home-recommend">
@@ -141,23 +134,13 @@ export default function Home() {
         </section>
       )}
 
-=======
->>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
       <h2 className="section-title">
         {query.trim() ? `Hasil pencarian "${query}"` : "Produk Unggulan"}
       </h2>
 
       <div className="product-grid">
         {filtered.length === 0 && (
-<<<<<<< HEAD
           <p className="home-empty-state">
-=======
-<<<<<<< HEAD
-          <p className="home-empty-state">
-=======
-          <p style={{ color: "var(--text-muted)", gridColumn: "1 / -1", textAlign: "center", padding: "40px 0" }}>
->>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
->>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
             Tidak ada produk yang cocok dengan pencarian kamu.
           </p>
         )}
@@ -188,8 +171,4 @@ export default function Home() {
       </div>
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 095d9324ff0110d5ca8010020221acfbc024b013
