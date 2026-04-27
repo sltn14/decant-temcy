@@ -16,7 +16,11 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="page-container">
+<<<<<<< HEAD
         <p className="detail-empty-state">
+=======
+        <p style={{ color: "var(--text-muted)", textAlign: "center", marginTop: 80 }}>
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
           Produk tidak ditemukan.
         </p>
       </div>

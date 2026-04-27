@@ -32,7 +32,11 @@ export default function Home() {
 
       <div className="product-grid">
         {filtered.length === 0 && (
+<<<<<<< HEAD
           <p className="home-empty-state">
+=======
+          <p style={{ color: "var(--text-muted)", gridColumn: "1 / -1", textAlign: "center", padding: "40px 0" }}>
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
             Tidak ada produk yang cocok dengan pencarian kamu.
           </p>
         )}

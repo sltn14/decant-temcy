@@ -1,11 +1,18 @@
 import { useState } from "react";
+<<<<<<< HEAD
 import Register from "./Register";
+=======
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
 import "./Auth.css";
 
 export default function Auth() {
   const [tab, setTab] = useState<"login" | "register">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+<<<<<<< HEAD
+=======
+  const [name, setName] = useState("");
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
 
   return (
     <div className="auth-page">
@@ -43,6 +50,7 @@ export default function Auth() {
 
           <div className="auth-divider">atau</div>
 
+<<<<<<< HEAD
           {tab === "login" ? (
             <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
               <div className="auth-field">
@@ -72,6 +80,45 @@ export default function Auth() {
           ) : (
             <Register />
           )}
+=======
+          <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+            {tab === "register" && (
+              <div className="auth-field">
+                <label>Nama Lengkap</label>
+                <input
+                  type="text"
+                  placeholder="Masukkan nama lengkap"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+            )}
+
+            <div className="auth-field">
+              <label>Email</label>
+              <input
+                type="email"
+                placeholder="contoh@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="auth-field">
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="Minimal 8 karakter"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <button type="submit" className="auth-submit">
+              {tab === "login" ? "Masuk" : "Daftar"}
+            </button>
+          </form>
+>>>>>>> f8414313536adeb3da10f77d241247082f2d3b1a
         </div>
 
         <p className="auth-footer">
