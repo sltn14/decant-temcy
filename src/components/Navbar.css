@@ -136,7 +136,6 @@
   padding: 0 4px;
 }
 
-<<<<<<< HEAD
 /* ── Login button (logged out) ── */
 
 .navbar-login-btn {
@@ -275,8 +274,6 @@
   color: #dc2626;
 }
 
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 @media (max-width: 768px) {
   .navbar {
     padding: 0 16px;
