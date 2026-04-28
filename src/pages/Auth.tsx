@@ -18,10 +18,7 @@ const AROMA_OPTIONS: { label: AromaPref; icon: string }[] = [
 const GENDER_OPTIONS: GenderPref[] = ["Unisex", "Female", "Masculine"];
 
 const PREF_STORAGE_KEY = "decant_user_pref";
-<<<<<<< HEAD
 const USER_DATA_KEY = "decant_user_data";
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 
 function AromaIcon({ type }: { type: string }) {
   const size = 18;
@@ -87,7 +84,6 @@ export default function Auth() {
     };
 
     localStorage.setItem(PREF_STORAGE_KEY, JSON.stringify(prefs));
-<<<<<<< HEAD
 
     const userData = {
       name: regName.trim(),
@@ -99,8 +95,6 @@ export default function Auth() {
     };
 
     localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
     setPrefError("");
     navigate("/");
   };
