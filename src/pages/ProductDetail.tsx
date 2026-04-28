@@ -1,317 +1,193 @@
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import { Star, Pencil } from "lucide-react";
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
-import { products, sizeOptions, formatRupiah } from "../data/products";
-import { useCart, SizeKey } from "../context/CartContext";
-import "./ProductDetail.css";
+import { FormEvent, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Register.css";
 
-<<<<<<< HEAD
-interface Review {
+type RegisterStep = "account" | "preferences";
+type AromaPreference =
+  | "Floral"
+  | "Woody"
+  | "Citrus"
+  | "Spicy"
+  | "Aquatic"
+  | "Oriental"
+  | "Fresh"
+  | "Musky";
+type GenderPreference = "Unisex" | "Feminine" | "Masculine";
+
+interface RegisterProfile {
   name: string;
-  rating: number;
-  comment: string;
-  date: string;
-  isUser?: boolean;
+  email: string;
+  aromaPreference: AromaPreference;
+  genderPreference: GenderPreference;
+  registeredAt: string;
 }
 
-const DUMMY_REVIEWS: Review[] = [
-  {
-    name: "Rina S.",
-    rating: 5,
-    comment: "Aromanya sangat tahan lama, cocok banget untuk pemakaian sehari-hari. Packaging decant-nya juga rapi dan aman.",
-    date: "20 Apr 2026",
-  },
-  {
-    name: "Andi P.",
-    rating: 4,
-    comment: "Sillage-nya oke, tapi untuk harga segini udah worth it. Bakal repurchase varian lain.",
-    date: "24 Apr 2026",
-  },
-  {
-    name: "Maya D.",
-    rating: 5,
-    comment: "Decant-nya pas, bisa buat test dulu sebelum beli botol full size. Recommended seller!",
-    date: "26 Apr 2026",
-  },
+const AROMA_OPTIONS: AromaPreference[] = [
+  "Floral",
+  "Woody",
+  "Citrus",
+  "Spicy",
+  "Aquatic",
+  "Oriental",
+  "Fresh",
+  "Musky",
 ];
 
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <span className="review-stars">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <Star
-          key={i}
-          size={14}
-          className={i <= rating ? "star-filled" : "star-empty"}
-        />
-      ))}
-    </span>
-  );
+const GENDER_OPTIONS: GenderPreference[] = ["Unisex", "Feminine", "Masculine"];
+
+const PROFILE_STORAGE_KEY = "decant-temcy-user-profile";
+
+interface RegisterProps {
+  onRegistered?: () => void;
 }
 
-function StarRatingInput({ value, onChange }: { value: number; onChange: (v: number) => void }) {
-  const [hover, setHover] = useState(0);
-
-  return (
-    <span className="review-stars-input">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <button
-          key={i}
-          type="button"
-          className={`star-input-btn ${i <= (hover || value) ? "active" : ""}`}
-          onClick={() => onChange(i)}
-          onMouseEnter={() => setHover(i)}
-          onMouseLeave={() => setHover(0)}
-          aria-label={`${i} bintang`}
-        >
-          <Star size={20} />
-        </button>
-      ))}
-    </span>
-  );
-}
-
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
-export default function ProductDetail() {
-  const { id } = useParams<{ id: string }>();
+export default function Register({ onRegistered }: RegisterProps) {
   const navigate = useNavigate();
-  const { addToCart } = useCart();
 
-  const product = products.find((p) => p.product_id === Number(id));
+  const [step, setStep] = useState<RegisterStep>("account");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [selectedAroma, setSelectedAroma] = useState<AromaPreference | "">("");
+  const [selectedGender, setSelectedGender] = useState<GenderPreference | "">("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const [selectedSize, setSelectedSize] = useState<SizeKey>("price_1ml");
-<<<<<<< HEAD
-  const [reviewText, setReviewText] = useState("");
-  const [reviewRating, setReviewRating] = useState(0);
-  const [reviews, setReviews] = useState<Review[]>(DUMMY_REVIEWS);
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [editText, setEditText] = useState("");
-  const [editRating, setEditRating] = useState(0);
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
+  const canContinueAccount = useMemo(() => {
+    return name.trim().length > 0 && email.trim().length > 0 && password.trim().length >= 8;
+  }, [name, email, password]);
 
-  if (!product) {
-    return (
-      <div className="page-container">
-        <p className="detail-empty-state">
-          Produk tidak ditemukan.
-        </p>
-      </div>
-    );
-  }
-
-  const currentPrice = product[selectedSize] as number;
-  const selectedLabel = sizeOptions.find((s) => s.key === selectedSize)?.label ?? "1ml";
-
-  const handleAddToCart = () => {
-    addToCart(product, selectedSize, selectedLabel);
-  };
-
-  const handleBuyNow = () => {
-    addToCart(product, selectedSize, selectedLabel);
-    navigate("/cart");
-  };
-
-<<<<<<< HEAD
-  const handleSubmitReview = (e: React.FormEvent) => {
+  const handleAccountSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!reviewText.trim() || reviewRating === 0) return;
+    if (!canContinueAccount) {
+      setErrorMessage("Lengkapi data akun. Password minimal 8 karakter.");
+      return;
+    }
+    setErrorMessage("");
+    setStep("preferences");
+  };
 
-    const newReview: Review = {
-      name: "Kamu",
-      rating: reviewRating,
-      comment: reviewText.trim(),
-      date: new Date().toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" }),
-      isUser: true,
+  const handlePreferenceSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!selectedAroma || !selectedGender) {
+      setErrorMessage("Pilih aroma favorit dan preferensi gender terlebih dahulu.");
+      return;
+    }
+
+    const profile: RegisterProfile = {
+      name: name.trim(),
+      email: email.trim(),
+      aromaPreference: selectedAroma,
+      genderPreference: selectedGender,
+      registeredAt: new Date().toISOString(),
     };
-    setReviews((prev) => [...prev, newReview]);
-    setReviewText("");
-    setReviewRating(0);
+
+    localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
+    setErrorMessage("");
+    onRegistered?.();
+    navigate("/");
   };
 
-  const handleStartEdit = (idx: number) => {
-    const review = reviews[idx];
-    setEditingIndex(idx);
-    setEditText(review.comment);
-    setEditRating(review.rating);
-  };
-
-  const handleSaveEdit = () => {
-    if (editingIndex === null || !editText.trim() || editRating === 0) return;
-    setReviews((prev) =>
-      prev.map((r, i) =>
-        i === editingIndex
-          ? { ...r, comment: editText.trim(), rating: editRating }
-          : r
-      )
-    );
-    setEditingIndex(null);
-    setEditText("");
-    setEditRating(0);
-  };
-
-  const handleCancelEdit = () => {
-    setEditingIndex(null);
-    setEditText("");
-    setEditRating(0);
-  };
-
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
   return (
-    <div className="page-container detail-page">
-      <div className="detail-layout">
-        <div className="detail-image-section">
-          <div className="detail-image-wrapper">
-            <div className="detail-image-placeholder">
-              {product.image_filename.replace(".png", "")}
-            </div>
-          </div>
-        </div>
-
-        <div className="detail-info-section">
-          <div>
-            <div className="detail-brand">{product.brand}</div>
-            <h1 className="detail-name">{product.product_name}</h1>
-            <span className="detail-concentration">{product.concentration}</span>
+    <div className="register-flow">
+      {step === "account" ? (
+        <form className="auth-form" onSubmit={handleAccountSubmit}>
+          <div className="auth-field">
+            <label>Nama Lengkap</label>
+            <input
+              type="text"
+              placeholder="Masukkan nama lengkap"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
 
-          <div className="detail-price">
-            {formatRupiah(currentPrice)}
-            <span className="detail-price-label">/ {selectedLabel}</span>
+          <div className="auth-field">
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="contoh@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
 
-          <div className="detail-divider" />
-
-          <div>
-            <div className="detail-section-title">Profil Aroma</div>
-            <div className="detail-notes">
-              <div className="detail-note-row">
-                <span className="detail-note-label">Top Notes</span>
-                <span className="detail-note-value">{product.top_notes}</span>
-              </div>
-              <div className="detail-note-row">
-                <span className="detail-note-label">Middle Notes</span>
-                <span className="detail-note-value">{product.middle_notes}</span>
-              </div>
-              <div className="detail-note-row">
-                <span className="detail-note-label">Base Notes</span>
-                <span className="detail-note-value">{product.base_notes}</span>
-              </div>
-            </div>
+          <div className="auth-field">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Minimal 8 karakter"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
 
-          <div className="detail-divider" />
+          {errorMessage && <p className="register-error-message">{errorMessage}</p>}
 
-          <div>
-            <div className="detail-section-title">Pilih Ukuran</div>
-            <div className="detail-sizes">
-              {sizeOptions.map((opt) => (
-                <div className="detail-size-option" key={opt.key}>
+          <button type="submit" className="auth-submit">
+            Daftar
+          </button>
+        </form>
+      ) : (
+        <form className="register-preferences-form" onSubmit={handlePreferenceSubmit}>
+          <div className="register-preferences-head">
+            <h3>Preferensi Aroma</h3>
+            <p>Lengkapi preferensi agar rekomendasi parfum lebih personal.</p>
+          </div>
+
+          <div className="register-preferences-group">
+            <p className="register-preferences-title">Aroma apa yang Anda sukai?</p>
+            <div className="register-choice-grid">
+              {AROMA_OPTIONS.map((option) => (
+                <label
+                  key={option}
+                  className={`register-choice-card ${selectedAroma === option ? "active" : ""}`}
+                >
                   <input
                     type="radio"
-                    id={opt.key}
-                    name="size"
-                    checked={selectedSize === opt.key}
-                    onChange={() => setSelectedSize(opt.key)}
+                    name="aroma"
+                    value={option}
+                    checked={selectedAroma === option}
+                    onChange={() => setSelectedAroma(option)}
                   />
-                  <label htmlFor={opt.key}>{opt.label}</label>
-                </div>
+                  <span>{option}</span>
+                </label>
               ))}
             </div>
           </div>
 
-          <div className="detail-actions">
-            <button className="btn-outline" onClick={handleAddToCart}>
-              + Tambah ke Keranjang
-            </button>
-            <button className="btn-primary" onClick={handleBuyNow}>
-              Beli Sekarang
-            </button>
-          </div>
-        </div>
-      </div>
-<<<<<<< HEAD
-
-      {/* ── Customer reviews ── */}
-      <section className="detail-reviews">
-        <h2 className="detail-reviews-title">Ulasan Pelanggan</h2>
-
-        <div className="detail-reviews-list">
-          {reviews.map((review, idx) => (
-            <div key={idx} className="detail-review-card">
-              <div className="detail-review-head">
-                <div className="detail-review-head-left">
-                  <span className="detail-review-name">{review.name}</span>
-                  <StarRating rating={review.rating} />
-                </div>
-                {review.isUser && editingIndex !== idx && (
-                  <button
-                    type="button"
-                    className="detail-review-edit-btn"
-                    onClick={() => handleStartEdit(idx)}
-                  >
-                    <Pencil size={13} /> Edit
-                  </button>
-                )}
-              </div>
-
-              {editingIndex === idx ? (
-                <div className="detail-review-edit-area">
-                  <StarRatingInput value={editRating} onChange={setEditRating} />
-                  <textarea
-                    value={editText}
-                    onChange={(e) => setEditText(e.target.value)}
-                    rows={3}
+          <div className="register-preferences-group">
+            <p className="register-preferences-title">Preferensi Gender</p>
+            <div className="register-choice-grid register-choice-grid-gender">
+              {GENDER_OPTIONS.map((option) => (
+                <label
+                  key={option}
+                  className={`register-choice-card ${selectedGender === option ? "active" : ""}`}
+                >
+                  <input
+                    type="radio"
+                    name="gender"
+                    value={option}
+                    checked={selectedGender === option}
+                    onChange={() => setSelectedGender(option)}
                   />
-                  <div className="detail-review-edit-actions">
-                    <button type="button" className="btn-primary" onClick={handleSaveEdit}>
-                      Simpan
-                    </button>
-                    <button type="button" className="btn-outline" onClick={handleCancelEdit}>
-                      Batal
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <p className="detail-review-comment">{review.comment}</p>
-                  <span className="detail-review-date">{review.date}</span>
-                </>
-              )}
+                  <span>{option}</span>
+                </label>
+              ))}
             </div>
-          ))}
-        </div>
-
-        <div className="detail-divider" />
-
-        <form className="detail-review-form" onSubmit={handleSubmitReview}>
-          <h3 className="detail-review-form-title">Tulis Ulasan Anda</h3>
-          <div className="detail-review-form-rating">
-            <span className="detail-review-form-rating-label">Rating:</span>
-            <StarRatingInput value={reviewRating} onChange={setReviewRating} />
           </div>
-          <textarea
-            placeholder="Bagikan pengalaman kamu tentang parfum ini..."
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
-            rows={3}
-          />
-          <button
-            type="submit"
-            className="btn-primary"
-            disabled={!reviewText.trim() || reviewRating === 0}
-          >
-            Kirim Ulasan
-          </button>
+
+          {errorMessage && <p className="register-error-message">{errorMessage}</p>}
+
+          <div className="register-preferences-actions">
+            <button type="button" className="btn-outline" onClick={() => setStep("account")}>
+              Kembali
+            </button>
+            <button type="submit" className="btn-primary">
+              Simpan & Lanjut ke Beranda
+            </button>
+          </div>
         </form>
-      </section>
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
+      )}
     </div>
   );
 }
