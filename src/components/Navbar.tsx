@@ -1,16 +1,10 @@
-<<<<<<< HEAD
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, ShoppingCart, User, LogOut, ChevronDown, LogIn } from "lucide-react";
-=======
-import { Link, useLocation } from "react-router-dom";
-import { Search, ShoppingCart, User } from "lucide-react";
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 import { useCart } from "../context/CartContext";
 import { useSearch } from "../context/SearchContext";
 import "./Navbar.css";
 
-<<<<<<< HEAD
 const USER_DATA_KEY = "decant_user_data";
 
 interface UserData {
@@ -48,13 +42,10 @@ function getAvatarColor(avatarId: string): string {
   return map[avatarId] ?? "#b91c1c";
 }
 
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 export default function Navbar() {
   const { totalItems } = useCart();
   const { query, setQuery } = useSearch();
   const location = useLocation();
-<<<<<<< HEAD
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(loadUserData);
@@ -105,11 +96,6 @@ export default function Navbar() {
 
   const isLoggedIn = !!userData;
 
-=======
-
-  const isActive = (path: string) => location.pathname === path;
-
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
   return (
     <nav className="navbar">
       <div className="navbar-inner">
@@ -144,7 +130,6 @@ export default function Navbar() {
             <ShoppingCart size={20} />
             {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
           </Link>
-<<<<<<< HEAD
 
           {isLoggedIn ? (
             <div className="navbar-profile-wrapper" ref={dropdownRef}>
@@ -194,11 +179,6 @@ export default function Navbar() {
               Login
             </Link>
           )}
-=======
-          <Link to="/auth" className="navbar-icon-btn">
-            <User size={20} />
-          </Link>
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
         </div>
       </div>
     </nav>
