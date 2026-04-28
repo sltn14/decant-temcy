@@ -11,10 +11,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 import ChatbotPage from "./pages/ChatbotPage";
-<<<<<<< HEAD
 import Profile from "./pages/Profile";
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 
 export default function App() {
   return (
@@ -33,10 +30,7 @@ export default function App() {
             <Route path="/payment" element={<Navigate to="/checkout" replace />} />
             <Route path="/success" element={<Success />} />
             <Route path="/chatbot" element={<ChatbotPage />} />
-<<<<<<< HEAD
             <Route path="/profile" element={<Profile />} />
-=======
->>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
           </Routes>
           <ChatbotWidget />
         </BrowserRouter>
