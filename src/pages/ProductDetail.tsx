@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import { Star, Pencil } from "lucide-react";
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 import { products, sizeOptions, formatRupiah } from "../data/products";
 import { useCart, SizeKey } from "../context/CartContext";
 import "./ProductDetail.css";
 
+<<<<<<< HEAD
 interface Review {
   name: string;
   rating: number;
@@ -70,6 +74,8 @@ function StarRatingInput({ value, onChange }: { value: number; onChange: (v: num
   );
 }
 
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -78,12 +84,15 @@ export default function ProductDetail() {
   const product = products.find((p) => p.product_id === Number(id));
 
   const [selectedSize, setSelectedSize] = useState<SizeKey>("price_1ml");
+<<<<<<< HEAD
   const [reviewText, setReviewText] = useState("");
   const [reviewRating, setReviewRating] = useState(0);
   const [reviews, setReviews] = useState<Review[]>(DUMMY_REVIEWS);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editText, setEditText] = useState("");
   const [editRating, setEditRating] = useState(0);
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 
   if (!product) {
     return (
@@ -107,6 +116,7 @@ export default function ProductDetail() {
     navigate("/cart");
   };
 
+<<<<<<< HEAD
   const handleSubmitReview = (e: React.FormEvent) => {
     e.preventDefault();
     if (!reviewText.trim() || reviewRating === 0) return;
@@ -150,6 +160,8 @@ export default function ProductDetail() {
     setEditRating(0);
   };
 
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
   return (
     <div className="page-container detail-page">
       <div className="detail-layout">
@@ -223,6 +235,7 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
+<<<<<<< HEAD
 
       {/* ── Customer reviews ── */}
       <section className="detail-reviews">
@@ -297,6 +310,8 @@ export default function ProductDetail() {
           </button>
         </form>
       </section>
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
     </div>
   );
 }

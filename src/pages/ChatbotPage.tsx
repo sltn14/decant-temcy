@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+=======
+import { FormEvent, useEffect, useMemo, useState } from "react";
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 import { MessageCircle, Plus, Send, Trash2 } from "lucide-react";
 import "./ChatbotPage.css";
 
@@ -18,7 +22,11 @@ interface ChatSession {
   messages: Message[];
 }
 
+<<<<<<< HEAD
 const CHAT_HISTORY_KEY = "decant_chat_history";
+=======
+const CHAT_HISTORY_KEY = "decant-temcy-chat-history";
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 
 const INITIAL_BOT_MESSAGE: Message = {
   id: 1,
@@ -96,6 +104,7 @@ export default function ChatbotPage() {
     }
   }, [sessions]);
 
+<<<<<<< HEAD
   // Auto-sync: listen for storage changes from ChatbotWidget
   const prevStorageRef = useRef<string>("");
   useEffect(() => {
@@ -144,6 +153,8 @@ export default function ChatbotPage() {
     return () => clearInterval(interval);
   }, [activeSessionId]);
 
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
   const activeSession = useMemo(
     () => sessions.find((session) => session.id === activeSessionId) ?? null,
     [sessions, activeSessionId]

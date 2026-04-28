@@ -8,6 +8,7 @@ interface Message {
   sender: "bot" | "user";
 }
 
+<<<<<<< HEAD
 interface ChatSession {
   id: number;
   title: string;
@@ -18,6 +19,8 @@ interface ChatSession {
 
 const CHAT_HISTORY_KEY = "decant_chat_history";
 
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 const INITIAL_MESSAGE: Message = {
   id: 0,
   text: "Halo! Saya asisten Decant Temcy. Ketik \"rekomendasi\" untuk mendapat saran parfum.",
@@ -45,6 +48,7 @@ function getBotReply(input: string): string {
   return "Maaf, saya belum bisa memahami pertanyaan itu. Coba tanyakan tentang rekomendasi parfum, harga, atau pengiriman.";
 }
 
+<<<<<<< HEAD
 function loadSessions(): ChatSession[] {
   try {
     const raw = localStorage.getItem(CHAT_HISTORY_KEY);
@@ -63,11 +67,14 @@ function saveSessions(sessions: ChatSession[]) {
   localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(sessions));
 }
 
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
 export default function ChatbotWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
+<<<<<<< HEAD
   const [activeSessionId, setActiveSessionId] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -96,6 +103,10 @@ export default function ChatbotWidget() {
     return () => window.removeEventListener("storage", handleStorage);
   }, [activeSessionId]);
 
+=======
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typing]);
@@ -105,12 +116,16 @@ export default function ChatbotWidget() {
     if (!text) return;
 
     const userMsg: Message = { id: Date.now(), text, sender: "user" };
+<<<<<<< HEAD
     const sessionTitle = text.length > 28 ? `${text.slice(0, 28)}...` : text;
 
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setTyping(true);
 
+<<<<<<< HEAD
     // Update shared localStorage
     const sessions = loadSessions();
     let updatedSessions: ChatSession[];
@@ -140,11 +155,14 @@ export default function ChatbotWidget() {
 
     saveSessions(updatedSessions);
 
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
     setTimeout(() => {
       const reply = getBotReply(text);
       const botMsg: Message = { id: Date.now() + 1, text: reply, sender: "bot" };
       setTyping(false);
       setMessages((prev) => [...prev, botMsg]);
+<<<<<<< HEAD
 
       // Save bot reply to shared storage
       const currentSessions = loadSessions();
@@ -161,6 +179,8 @@ export default function ChatbotWidget() {
         )
         .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
       saveSessions(finalSessions);
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
     }, 800 + Math.random() * 600);
   };
 

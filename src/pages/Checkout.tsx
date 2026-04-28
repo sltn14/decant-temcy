@@ -72,6 +72,7 @@ export default function Checkout() {
   const handlePay = () => {
     setPaying(true);
     setTimeout(() => {
+<<<<<<< HEAD
       // Save order to localStorage for Profile page
       const orderId = `DTC-${Date.now().toString().slice(-4)}`;
       const orderItems = items.map((i) => ({
@@ -99,6 +100,8 @@ export default function Checkout() {
         localStorage.setItem("decant_orders", JSON.stringify([newOrder]));
       }
 
+=======
+>>>>>>> e01b2cb1632a75816f851e0758db7c93b772170c
       clearCart();
       navigate("/success");
     }, 3000);
