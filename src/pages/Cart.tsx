@@ -8,16 +8,6 @@ export default function Cart() {
   const { items, updateQuantity, removeFromCart, totalPrice, totalItems } = useCart();
   const navigate = useNavigate();
 
-  const handleCheckout = () => {
-    const loggedIn = !!(localStorage.getItem("decant_user_pref") || localStorage.getItem("decant_user_data"));
-    if (!loggedIn) {
-      alert("Silakan login terlebih dahulu untuk melakukan checkout!");
-      navigate("/auth");
-      return;
-    }
-    navigate("/checkout");
-  };
-
   if (items.length === 0) {
     return (
       <div className="page-container cart-page">
@@ -125,7 +115,7 @@ export default function Cart() {
             <span className="label">Total</span>
             <span className="value">{totalPrice}</span>
           </div>
-          <button className="btn-primary" onClick={handleCheckout}>
+          <button className="btn-primary" onClick={() => navigate("/checkout")}>
             Lanjut ke Checkout
           </button>
         </div>
